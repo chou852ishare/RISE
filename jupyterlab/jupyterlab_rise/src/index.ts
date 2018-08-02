@@ -1,4 +1,4 @@
-declare let require:(moduleId:string) => any;
+declare let require: (moduleId: string) => any;
 let Reveal = require('reveal.js');
 
 import {
@@ -40,7 +40,7 @@ const extension: JupyterLabPlugin<void> = {
  * A notebook widget extension that adds a RISE button to the toolbar.
  */
 export
-class RiseExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
+  class RiseExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
   /**
    * Create a new extension object.
    */
@@ -51,7 +51,7 @@ class RiseExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, 
         let slideshow = (cell.metadata.get("slideshow") || {});
         let slide_type = (slideshow as JSONObject)['slide_type'];
         //console.log(slide_type);
-       return ((slide_type === undefined) || (slide_type == '-')) ? '' : slide_type;
+        return ((slide_type === undefined) || (slide_type == '-')) ? '' : slide_type;
       }
 
       // function is_slide(cell: any)    {return get_slide_type(cell) == 'slide';}
@@ -64,7 +64,7 @@ class RiseExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, 
         let slide_counter = 0;
         let cells = container.model.cells;
 
-        for (let i=0; i < cells.length; i++) {
+        for (let i = 0; i < cells.length; i++) {
           let cell = cells.get(i);
           let slide_type = get_slide_type(cell);
 
@@ -86,11 +86,11 @@ class RiseExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, 
             slide_section.appendChild(cell_node);
             console.log("Nop slide", i);
           }
-        console.log(container.node);
+          console.log(container.node);
         }
       }
 
-      let notebook = panel.notebook;
+      let notebook = panel.content;
       markupSlides(notebook);
 
       let panel_container = document.getElementsByClassName("jp-NotebookPanel")[0];
@@ -106,16 +106,16 @@ class RiseExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, 
       //let revealTheme = require('reveal.js/css/theme/simple.css');
 
       Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
         transition: 'slide', // none/fade/slide/convex/concave/zoom
         //make codemirror works as expected
         minScale: 1.0,
         maxScale: 1.0
-			});
+      });
     };
 
     let button = new ToolbarButton({
